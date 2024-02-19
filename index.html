@@ -19,7 +19,7 @@
             /* Adjust as needed */
             height: 53vw;
             /* Maintain aspect ratio for the grid */
-            margin: 0 1vw 0 47vw;
+            margin: 0 auto;
         }
 
         .square {
@@ -33,11 +33,18 @@
             background-color: aqua;
 
         }
+
+        #sizePrompt {
+            margin: 0 auto;
+            display: block;
+        }
     </style>
 </head>
 
 <body>
-    <!-- <button onclick="clearGrid(16)">Reset</button> -->
+
+    <button onclick="requestSize()" id="sizePrompt">Change size</button>
+    <br>
 
     <div class="container" id="grid-container">
         <!-- Grid squares will be dynamically added here -->
@@ -46,6 +53,20 @@
     <script>
         const container = document.getElementById("grid-container")
 
+        function requestSize() {
+            let size = parseInt(prompt("Enter size of grid from 1 to 100 here"))
+            console.log(size)
+            if (isNaN(size) || size >= 101) {
+                alert("Enter a number from 1 to 100")
+            } else {
+                clearGrid(size)
+            }
+        }
+
+        function clearGrid(size) {
+            container.innerHTML = "";
+            makeGrid(size)
+        }
 
         function makeSquare(size) {
             const squareDiv = document.createElement("div")
