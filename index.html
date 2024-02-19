@@ -34,7 +34,7 @@
 
         }
 
-        #sizePrompt {
+        #sizePrompt #resetButton {
             margin: 0 auto;
             display: block;
         }
@@ -44,12 +44,14 @@
 <body>
 
     <button onclick="requestSize()" id="sizePrompt">Change size</button>
+    <button id="resetButton" onclick="clearGrid()">Reset</button>
+
     <br>
 
     <div class="container" id="grid-container">
         <!-- Grid squares will be dynamically added here -->
     </div>
-
+    -
     <script>
         const container = document.getElementById("grid-container")
 
@@ -64,8 +66,14 @@
         }
 
         function clearGrid(size) {
-            container.innerHTML = "";
+            container.innerHTML = ""; //Wipes everything clean
             makeGrid(size)
+            updateResetButton(size);
+        }
+
+        function updateResetButton(size) {
+            const resetButton = document.getElementById("resetButton");
+            resetButton.setAttribute("onclick", `clearGrid(${size})`); // Set onclick attribute with the current size
         }
 
         function makeSquare(size) {
@@ -84,8 +92,9 @@
                 container.appendChild(makeSquare(size))
             }
         }
-
-        makeGrid(16)
+        let size = 16
+        makeGrid(size)
+        updateResetButton(size);
     </script>
 </body>
 
