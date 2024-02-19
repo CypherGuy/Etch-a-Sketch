@@ -19,7 +19,7 @@
             /* Adjust as needed */
             height: 53vw;
             /* Maintain aspect ratio for the grid */
-            margin: 0 0 0 50vw;
+            margin: 0 1vw 0 47vw;
         }
 
         .square {
@@ -37,7 +37,7 @@
 </head>
 
 <body>
-    <button onclick="clearGrid(16)">Reset</button>
+    <!-- <button onclick="clearGrid(16)">Reset</button> -->
 
     <div class="container" id="grid-container">
         <!-- Grid squares will be dynamically added here -->
@@ -52,17 +52,10 @@
             squareDiv.classList.add("square")
             squareDiv.setAttribute("style", `--size: ${size};`);
             squareDiv.addEventListener("mouseenter", function () {
-                squareDiv.addEventListener("mouseenter", function () {
-                    squareDiv.classList.add("permament-hover");
+                squareDiv.classList.add("permament-hover");
 
-                })
             })
             return squareDiv
-        }
-
-        function clearGrid(size) {
-            container.innerHTML = "";
-            makeGrid(size)
         }
 
         function makeGrid(size) {
