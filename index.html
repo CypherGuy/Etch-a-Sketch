@@ -28,6 +28,11 @@
             border: 1px solid black;
             box-sizing: border-box;
         }
+
+        .square.permament-hover {
+            background-color: aqua;
+
+        }
     </style>
 </head>
 
@@ -46,6 +51,12 @@
             const squareDiv = document.createElement("div")
             squareDiv.classList.add("square")
             squareDiv.setAttribute("style", `--size: ${size};`);
+            squareDiv.addEventListener("mouseenter", function () {
+                squareDiv.addEventListener("mouseenter", function () {
+                    squareDiv.classList.add("permament-hover");
+
+                })
+            })
 
             return squareDiv
 
