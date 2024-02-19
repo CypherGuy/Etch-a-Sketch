@@ -1,0 +1,15 @@
+.row {
+    display: flex;
+    gap: 1px
+}
+
+.col {
+    background-color: aqua;
+    padding: 1rem 0;
+    flex: 1;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto
+}
