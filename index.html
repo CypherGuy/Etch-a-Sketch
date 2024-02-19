@@ -37,7 +37,7 @@
 </head>
 
 <body>
-
+    <button onclick="clearGrid(16)">Reset</button>
 
     <div class="container" id="grid-container">
         <!-- Grid squares will be dynamically added here -->
@@ -57,9 +57,12 @@
 
                 })
             })
-
             return squareDiv
+        }
 
+        function clearGrid(size) {
+            container.innerHTML = "";
+            makeGrid(size)
         }
 
         function makeGrid(size) {
