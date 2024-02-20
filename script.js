@@ -70,7 +70,7 @@ function makeSquare(size) {
         } else {
             squareDiv.classList.remove("random-color");
             squareDiv.classList.add("permament-color");
-            squareDiv.style.backgroundColor = "rgb(0, 255, 132)"; // This overrides the random colour on hover
+            squareDiv.style.backgroundColor = document.getElementById("favcolor").value; // This overrides the random colour on hover
         }
     });
 
