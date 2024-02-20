@@ -75,28 +75,31 @@ function makeSquare(size) {
     squareDiv.classList.add("square");
     squareDiv.setAttribute("style", `--size: ${size}; background-color: white;`);
 
-    squareDiv.addEventListener("mouseenter", function () {
-        if (randomColor) {
-            squareDiv.classList.remove("permament-color");
-            squareDiv.classList.add("random-color");
-            if (eraser) {
-                squareDiv.style.backgroundColor = "white";
+    squareDiv.addEventListener("mousemove", function (event) {
+        if (event.buttons === 1) { // Check if the left mouse button is pressed
+            if (randomColor) {
+                squareDiv.classList.remove("permament-color");
+                squareDiv.classList.add("random-color");
+                if (eraser) {
+                    squareDiv.style.backgroundColor = "white";
+                } else {
+                    squareDiv.style.backgroundColor = getRandomRGB();
+                }
             } else {
-            squareDiv.style.backgroundColor = getRandomRGB();
+                squareDiv.classList.remove("random-color");
+                squareDiv.classList.add("permament-color");
+                if (eraser) {
+                    squareDiv.style.backgroundColor = "white";
+                } else {
+                    squareDiv.style.backgroundColor = document.getElementById("favcolor").value;
+                }
             }
-        } else {
-            squareDiv.classList.remove("random-color");
-            squareDiv.classList.add("permament-color");
-            if (eraser) {
-                squareDiv.style.backgroundColor = "white";
-            } else {
-            squareDiv.style.backgroundColor = document.getElementById("favcolor").value; // This overrides the random colour on hover
         }
-    }
     });
 
     return squareDiv;
 }
+
 
 function makeGrid(size) {
     for (let i = 0; i < size ** 2; i++) {
