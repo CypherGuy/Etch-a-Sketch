@@ -97,6 +97,26 @@ function makeSquare(size) {
         }
     });
 
+    squareDiv.addEventListener("click", function (event) {
+        if (randomColor) {
+            squareDiv.classList.remove("permament-color");
+            squareDiv.classList.add("random-color");
+            if (eraser) {
+                squareDiv.style.backgroundColor = "white";
+            } else {
+                squareDiv.style.backgroundColor = getRandomRGB();
+            }
+        } else {
+            squareDiv.classList.remove("random-color");
+            squareDiv.classList.add("permament-color");
+            if (eraser) {
+                squareDiv.style.backgroundColor = "white";
+            } else {
+                squareDiv.style.backgroundColor = document.getElementById("favcolor").value;
+            }
+        }
+    })
+
     return squareDiv;
 }
 
