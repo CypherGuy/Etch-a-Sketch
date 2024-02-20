@@ -1,6 +1,7 @@
 const container = document.getElementById("grid-container");
 let randomColor = false;
 let bars = true;
+let eraser = false;
 
 function randomColours() {
     randomColor = !randomColor;
@@ -9,6 +10,16 @@ function randomColours() {
         button.innerHTML = "Back to normal";
     } else {
         button.innerHTML = "Random Colours";
+    }
+}
+
+function setEraser() {
+    eraser = !eraser;
+    let button = document.getElementById("setEraser");
+    if (eraser) {
+        button.innerHTML = "Eraser: On";
+    } else {
+        button.innerHTML = "Eraser: Off";
     }
 }
 
@@ -66,12 +77,20 @@ function makeSquare(size) {
         if (randomColor) {
             squareDiv.classList.remove("permament-color");
             squareDiv.classList.add("random-color");
+            if (eraser) {
+                squareDiv.style.backgroundColor = "white";
+            } else {
             squareDiv.style.backgroundColor = getRandomRGB();
+            }
         } else {
             squareDiv.classList.remove("random-color");
             squareDiv.classList.add("permament-color");
+            if (eraser) {
+                squareDiv.style.backgroundColor = "white";
+            } else {
             squareDiv.style.backgroundColor = document.getElementById("favcolor").value; // This overrides the random colour on hover
         }
+    }
     });
 
     return squareDiv;

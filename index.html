@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Etch N Sketch</title>
-
 </head>
 
 <body>
@@ -16,9 +15,10 @@
     <div class="button-container">
         <button id="sizePrompt" onclick="requestSize()">Change size</button>
         <button id="resetButton" onclick="clearGrid()">Reset</button>
-        <input type="color" id="favcolor" name="favcolor" value="#ff0000" />
         <button id="randomiseColours" onclick="randomColours()">Random Colours</button>
         <button id="removeBars" onclick="setBars()">Remove Grid lines</button>
+        <input type="color" id="favcolor" name="favcolor" value="#ff0000" />
+        <button id="setEraser" onclick="setEraser()">Eraser: Off</button>
     </div>
 
     <div class="container" id="grid-container">

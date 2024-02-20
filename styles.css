@@ -32,6 +32,12 @@ h1 {
 }
 
 .button-container {
-
+    display: flex;
+    justify-content: space-between;
     padding: 10px 20px;
 }
+
+.button-container button {
+    margin-right: 15px;
+}
+
