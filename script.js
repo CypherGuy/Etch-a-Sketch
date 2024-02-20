@@ -18,8 +18,10 @@ function setEraser() {
     let button = document.getElementById("setEraser");
     if (eraser) {
         button.innerHTML = "Eraser: On";
+        button.style.backgroundColor = "pink";
     } else {
         button.innerHTML = "Eraser: Off";
+        button.style.backgroundColor = "white";
     }
 }
 
