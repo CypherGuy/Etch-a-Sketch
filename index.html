@@ -29,14 +29,8 @@
             box-sizing: border-box;
         }
 
-        .square.permament-hover {
-            background-color: aqua;
-
-        }
-
-        #sizePrompt #resetButton {
-            margin: 0 auto;
-            display: block;
+        .permament-color {
+            background-color: rgb(0, 255, 132);
         }
     </style>
 </head>
@@ -45,29 +39,35 @@
 
     <button onclick="requestSize()" id="sizePrompt">Change size</button>
     <button id="resetButton" onclick="clearGrid()">Reset</button>
+    <button id="randomiseColours" onclick="randomColours()"> Randomise colours</button>
 
     <br>
 
     <div class="container" id="grid-container">
         <!-- Grid squares will be dynamically added here -->
     </div>
-    -
+
     <script>
-        const container = document.getElementById("grid-container")
+        const container = document.getElementById("grid-container");
+        let randomColor = false;
+
+        function randomColours() {
+            randomColor = !randomColor;
+        }
 
         function requestSize() {
-            let size = parseInt(prompt("Enter size of grid from 1 to 100 here"))
-            console.log(size)
+            let size = parseInt(prompt("Enter size of grid from 1 to 100 here"));
+            console.log(size);
             if (isNaN(size) || size >= 101) {
-                alert("Enter a number from 1 to 100")
+                alert("Enter a number from 1 to 100");
             } else {
-                clearGrid(size)
+                clearGrid(size);
             }
         }
 
         function clearGrid(size) {
             container.innerHTML = ""; //Wipes everything clean
-            makeGrid(size)
+            makeGrid(size);
             updateResetButton(size);
         }
 
@@ -77,23 +77,40 @@
         }
 
         function makeSquare(size) {
-            const squareDiv = document.createElement("div")
-            squareDiv.classList.add("square")
+            const squareDiv = document.createElement("div");
+            squareDiv.classList.add("square");
             squareDiv.setAttribute("style", `--size: ${size};`);
-            squareDiv.addEventListener("mouseenter", function () {
-                squareDiv.classList.add("permament-hover");
 
-            })
-            return squareDiv
+            squareDiv.addEventListener("mouseenter", function () {
+                if (randomColor) {
+                    squareDiv.classList.remove("permament-color");
+                    squareDiv.classList.add("random-color");
+                    squareDiv.style.backgroundColor = getRandomRGB();
+                } else {
+                    squareDiv.classList.remove("random-color");
+                    squareDiv.classList.add("permament-color");
+                    squareDiv.style.backgroundColor = "rgb(0, 255, 132)"; // This overrides the random colour on hover
+                }
+            });
+
+            return squareDiv;
         }
 
         function makeGrid(size) {
             for (let i = 0; i < size ** 2; i++) {
-                container.appendChild(makeSquare(size))
+                container.appendChild(makeSquare(size));
             }
         }
-        let size = 16
-        makeGrid(size)
+
+        function getRandomRGB() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        let size = 16;
+        makeGrid(size);
         updateResetButton(size);
     </script>
 </body>
