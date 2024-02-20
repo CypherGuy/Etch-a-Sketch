@@ -98,22 +98,39 @@ function makeSquare(size) {
     });
 
     squareDiv.addEventListener("click", function (event) {
-        if (randomColor) {
-            squareDiv.classList.remove("permament-color");
-            squareDiv.classList.add("random-color");
-            if (eraser) {
-                squareDiv.style.backgroundColor = "white";
+        if (squareDiv.style.backgroundColor === "white"){
+            if (randomColor) {
+                squareDiv.classList.remove("permament-color");
+                squareDiv.classList.add("random-color");
+                if (eraser) {
+                    squareDiv.style.backgroundColor = "white";
+                } else {
+                    squareDiv.style.backgroundColor = getRandomRGB();
+                }
             } else {
-                squareDiv.style.backgroundColor = getRandomRGB();
+                squareDiv.classList.remove("random-color");
+                squareDiv.classList.add("permament-color");
+                if (eraser) {
+                    squareDiv.style.backgroundColor = "white";
+                } else {
+                    squareDiv.style.backgroundColor = document.getElementById("favcolor").value;
+                }
             }
-        } else {
-            squareDiv.classList.remove("random-color");
-            squareDiv.classList.add("permament-color");
+
+        } else { // Background colour is not white
             if (eraser) {
-                squareDiv.style.backgroundColor = "white";
+                squareDiv.style.opacity = '1';
+
             } else {
-                squareDiv.style.backgroundColor = document.getElementById("favcolor").value;
+                if (!squareDiv.style.opacity  || parseFloat(squareDiv.style.opacity) === 0.0){
+                    squareDiv.style.opacity = '0.9';
+                } else {
+                    opacity = parseFloat(squareDiv.style.opacity);
+                    squareDiv.style.opacity = opacity - 0.1;
+                }
+
             }
+
         }
     })
 

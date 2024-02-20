@@ -5,8 +5,12 @@ html {
 }
 
 body {
-    background-color: gray;
+    background-color: rgb(121, 119, 119);
 }
+
+.whitebg {
+    background-color: white;
+}   
 
 h1 {
     text-align: center;
@@ -23,7 +27,7 @@ h1 {
 .square {
     width: calc(100% / var(--size));
     height: calc(100% / var(--size));
-    border: 1px solid black;
+    border: 2px solid black;
     box-sizing: border-box;
 }
 
