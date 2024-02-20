@@ -4,6 +4,12 @@ let bars = true;
 
 function randomColours() {
     randomColor = !randomColor;
+    let button = document.getElementById("randomiseColours");
+    if (randomColor) {
+        button.innerHTML = "Back to normal";
+    } else {
+        button.innerHTML = "Random Colours";
+    }
 }
 
 function setBars() {
@@ -34,11 +40,15 @@ function updateResetButton(size) {
 
 function updateBars() {
     if (bars) {
+        let button = document.getElementById("removeBars");
+        button.innerHTML = "Remove Grid lines";
         let squares = document.getElementsByClassName("square");
         for(let i = 0; i < squares.length; i++) {
             squares[i].style.border = "1px solid black";
         }
     } else {
+        let button = document.getElementById("removeBars");
+        button.innerHTML = "Add Grid lines";
         let squares = document.getElementsByClassName("square");
         for(let i = 0; i < squares.length; i++) {
             squares[i].style.border = "none";
