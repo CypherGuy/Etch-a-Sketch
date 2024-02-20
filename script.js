@@ -1,22 +1,22 @@
-const container = document.getElementById("grid-container");
-let randomColor = false;
-let bars = true;
-let eraser = false;
+const gridContainer = document.getElementById("grid-container");
+let randomColors = false;
+let showGridLines = true;
+let eraserMode = false;
 
-function randomColours() {
-    randomColor = !randomColor;
+function toggleRandomColours() {
+    randomColors = !randomColors;
     let button = document.getElementById("randomiseColours");
-    if (randomColor) {
+    if (randomColors) {
         button.innerHTML = "Back to normal";
     } else {
         button.innerHTML = "Random Colours";
     }
 }
 
-function setEraser() {
-    eraser = !eraser;
-    let button = document.getElementById("setEraser");
-    if (eraser) {
+function toggleEraser() {
+    eraserMode = !eraserMode;
+    let button = document.getElementById("toggleEraser");
+    if (eraserMode) {
         button.innerHTML = "Eraser: On";
         button.style.backgroundColor = "pink";
     } else {
@@ -25,42 +25,41 @@ function setEraser() {
     }
 }
 
-function setBars() {
-    bars = !bars;
-    updateBars();
+function toggleGridLines() {
+    showGridLines = !showGridLines;
+    updateGridLines();
 }
 
-function requestSize() {
-    let size = parseInt(prompt("Enter size of grid from 1 to 100 here"));
-    console.log(size);
-    if (isNaN(size) || size >= 101) {
-        alert("Enter a number from 1 to 100");
+function changeGridSize() {
+    const size = parseInt(prompt("Enter grid size (1-100):"));
+    if (isNaN(size) || size < 1 || size > 100) {
+        alert("Please enter a number between 1 and 100.");
     } else {
-        clearGrid(size);
+        resetSketch(size);
     }
 }
 
-function clearGrid(size) {
-    container.innerHTML = ""; // Clear the grid container
-    makeGrid(size); // Recreate the grid with the specified size
+function resetSketch(size) {
+    gridContainer.innerHTML = ""; // Clear the grid container
+    createGrid(size); // Recreate the grid with the specified size
     updateResetButton(size);
 }
 
 function updateResetButton(size) {
     const resetButton = document.getElementById("resetButton");
-    resetButton.setAttribute("onclick", `clearGrid(${size})`); // Set onclick attribute with the current size
+    resetButton.setAttribute("onclick", `resetSketch(${size})`); // Set onclick attribute with the current size
 }
 
-function updateBars() {
-    if (bars) {
-        let button = document.getElementById("removeBars");
+function updateGridLines() {
+    if (showGridLines) {
+        let button = document.getElementById("toggleGridLines");
         button.innerHTML = "Remove Grid lines";
         let squares = document.getElementsByClassName("square");
         for(let i = 0; i < squares.length; i++) {
             squares[i].style.border = "1px solid black";
         }
     } else {
-        let button = document.getElementById("removeBars");
+        let button = document.getElementById("toggleGridLines");
         button.innerHTML = "Add Grid lines";
         let squares = document.getElementsByClassName("square");
         for(let i = 0; i < squares.length; i++) {
@@ -70,28 +69,28 @@ function updateBars() {
     }
 }
 
-function makeSquare(size) {
+function createSquare(size) {
     const squareDiv = document.createElement("div");
     squareDiv.classList.add("square");
     squareDiv.setAttribute("style", `--size: ${size}; background-color: white;`);
 
     squareDiv.addEventListener("mousemove", function (event) {
         if (event.buttons === 1) { // Check if the left mouse button is pressed
-            if (randomColor) {
-                squareDiv.classList.remove("permament-color");
+            if (randomColors) {
+                squareDiv.classList.remove("permanent-color");
                 squareDiv.classList.add("random-color");
-                if (eraser) {
+                if (eraserMode) {
                     squareDiv.style.backgroundColor = "white";
                 } else {
                     squareDiv.style.backgroundColor = getRandomRGB();
                 }
             } else {
                 squareDiv.classList.remove("random-color");
-                squareDiv.classList.add("permament-color");
-                if (eraser) {
+                squareDiv.classList.add("permanent-color");
+                if (eraserMode) {
                     squareDiv.style.backgroundColor = "white";
                 } else {
-                    squareDiv.style.backgroundColor = document.getElementById("favcolor").value;
+                    squareDiv.style.backgroundColor = document.getElementById("colorPicker").value;
                 }
             }
         }
@@ -99,26 +98,26 @@ function makeSquare(size) {
 
     squareDiv.addEventListener("click", function (event) {
         if (squareDiv.style.backgroundColor === "white"){
-            if (randomColor) {
-                squareDiv.classList.remove("permament-color");
+            if (randomColors) {
+                squareDiv.classList.remove("permanent-color");
                 squareDiv.classList.add("random-color");
-                if (eraser) {
+                if (eraserMode) {
                     squareDiv.style.backgroundColor = "white";
                 } else {
                     squareDiv.style.backgroundColor = getRandomRGB();
                 }
             } else {
                 squareDiv.classList.remove("random-color");
-                squareDiv.classList.add("permament-color");
-                if (eraser) {
+                squareDiv.classList.add("permanent-color");
+                if (eraserMode) {
                     squareDiv.style.backgroundColor = "white";
                 } else {
-                    squareDiv.style.backgroundColor = document.getElementById("favcolor").value;
+                    squareDiv.style.backgroundColor = document.getElementById("colorPicker").value;
                 }
             }
 
         } else { // Background colour is not white
-            if (eraser) {
+            if (eraserMode) {
                 squareDiv.style.opacity = '1';
 
             } else {
@@ -137,10 +136,9 @@ function makeSquare(size) {
     return squareDiv;
 }
 
-
-function makeGrid(size) {
+function createGrid(size) {
     for (let i = 0; i < size ** 2; i++) {
-        container.appendChild(makeSquare(size));
+        gridContainer.appendChild(createSquare(size));
     }
 }
 
@@ -151,6 +149,6 @@ function getRandomRGB() {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
-let size = 16;
-makeGrid(size);
-updateResetButton(size);
+let defaultSize = 16;
+createGrid(defaultSize);
+updateResetButton(defaultSize);
