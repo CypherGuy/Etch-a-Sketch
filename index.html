@@ -8,24 +8,32 @@
     <title>Etch N Sketch</title>
 </head>
 
-<body>
+<body class="mainbg">
     <h1>Etch-N-Sketch</h1>
-    <hr />
+    <div class="graybg">
+        <hr />
 
-    <div class="button-container">
-        <button id="sizeButton" onclick="changeGridSize()">Change size</button>
-        <button id="resetButton" onclick="resetSketch()">Reset</button>
-        <button id="randomiseColours" onclick="toggleRandomColours()">Random Colours</button>
-        <button id="toggleGridLines" onclick="toggleGridLines()">Toggle Grid lines</button>
-        <input type="color" id="colorPicker" name="favcolor" value="#ff0000" />
-        <button id="toggleEraser" onclick="toggleEraser()">Eraser: Off</button>
+        <div class="button-container">
+            <button id="sizeButton" onclick="changeGridSize()">Change size</button>
+            <button id="resetButton" onclick="resetSketch()">Reset</button>
+            <button id="randomiseColours" onclick="toggleRandomColours()">Random Colours</button>
+            <button id="toggleGridLines" onclick="toggleGridLines()">Remove Grid lines</button>
+            <input type="color" id="colorPicker" name="favcolor" value="#ff0000" />
+            <button id="toggleEraser" onclick="toggleEraser()">Eraser: Off</button>
+        </div>
+
+        <div class="container whitebg" id="grid-container">
+            <!-- Grid squares will be dynamically added here -->
+        </div>
+
+        <script src="script.js"></script>
+
+        <footer class="footer">
+            <strong> Etch N Sketch </strong> | Created by CypherGuy
+        </footer>
+        <br>
     </div>
 
-    <div class="container whitebg" id="grid-container">
-        <!-- Grid squares will be dynamically added here -->
-    </div>
-
-    <script src="script.js"></script>
 </body>
 
 </html>

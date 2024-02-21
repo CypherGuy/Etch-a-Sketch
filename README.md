@@ -16,9 +16,9 @@ This is part of The Odin Project.
 
 1. Clone this repository:
 
-- git clone git@github.com:CypherGuy/Etch-a-Sketch.git
+- `git clone git@github.com:CypherGuy/Etch-a-Sketch.git`
 
-2. Open `index.html` in your web browser.
+2. Open index.html in your web browser.
 
 3. Use the buttons provided to interact with the drawing application:
    - Click "Change size" to specify a new grid size.
